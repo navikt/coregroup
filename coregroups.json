@@ -1,0 +1,183 @@
+[
+  {
+    "application": "dmgr",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  {
+    "application": "emottak-admin ",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "emottak-asynch",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "emottak-synch",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "emottak-t1-asynch",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "emottak-t1-synch",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "emottak-tokt",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "innkjopsportalen",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "webenabler",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "gosys",
+    "coregroupName": "HACoreGroup1"
+  },
+  { 
+    "application": "gsak",
+    "coregroupName": "HACoreGroup1"
+  },
+  { 
+    "application": "gsynk",
+    "coregroupName": "HACoreGroup1"
+  },
+  { 
+    "application": "ruting",
+    "coregroupName": "HACoreGroup1"
+  },
+  { 
+    "application": "bisys",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "bisys-batch",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "bprof",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "inst",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "medl",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "norg",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "tp",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "tps-admin",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "eia",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "kuhr",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "ondemandbrev",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "dialoguedlf",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "brevserver",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "oppdrag",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "mot",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "diagnoseregistrering",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "skanning",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "klanke",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "pensjon-fss",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
+    "application": "personkort",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
+    "application": "personkort-oppkobling",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
+    "application": "trafikanten-fss",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
+    "application": "eresept",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "frikort",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "joark",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "kuhl",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "landoppgjor",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "sapo",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "saposervices",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "nav-diagnostics",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "tpsws",
+    "coregroupName": "NoHACoreGroup"
+  },
+  { 
+    "application": "utbetaldata",
+    "coregroupName": "NoHACoreGroup"
+  }
+]
+
