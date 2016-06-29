@@ -141,43 +141,43 @@
   },
   { 
     "application": "eresept",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "frikort",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "joark",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "kuhl",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "landoppgjor",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "sapo",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "saposervices",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "nav-diagnostics",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "tpsws",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   },
   { 
     "application": "utbetaldata",
-    "coregroupName": "NoHACoreGroup"
+    "coregroupName": "NoHACoreGroup1"
   }
 ]
 

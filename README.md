@@ -1,4 +1,4 @@
-# sentinel
+# Coregroup service
 
 Go-tjeneste som sjekker hvilken coregroup en WAS-applikasjon skal tiløre
 
