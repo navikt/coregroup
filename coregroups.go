@@ -7,6 +7,10 @@ import (
 	"log"
 )
 
+var (
+	port = ":8080"
+)
+
 type coregroup struct {
 	Application string `json:"application"`
 	CoregroupName string `json:"coregroupName"`
@@ -51,6 +55,13 @@ func main() {
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
 	mux.Handle("/coregroup/", vh)
-    http.ListenAndServe(":8080", mux)
+    err = http.ListenAndServe(port, mux)
+
+	if err != nil {
+		log.Fatal("Couldn't start application on ", port)	
+		panic(err)
+	}
+
+
 }
 
