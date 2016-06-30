@@ -1,4 +1,4 @@
-FROM docker.adeo.no:5000/scratch
+FROM docker.adeo.no:5000/go-scratch
 MAINTAINER Sten Røkke<sten.ivar.rokke@nav.no>
 
 WORKDIR /src
