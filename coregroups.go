@@ -5,15 +5,39 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"log"
+	"flag"
+	"os"
+	"fmt"
 )
 
 var (
-	port = ":8080"
+	coregroupFile = flag.String("file", "", "")
+	cert = flag.String("cert", "", "")
+	key = flag.String("key", "", "")
 )
+
+var usage = `Usage: coregroups [options...]
+
+Options:
+
+  -file  		JSON-file containing your endpoints
+  -cert			Server certificate
+  -key			Server private key
+`
 
 type coregroup struct {
 	Application string `json:"application"`
 	CoregroupName string `json:"coregroupName"`
+}
+
+func usageAndExit(msg string) {
+	if msg != "" {
+		fmt.Fprintf(os.Stderr, msg)
+		fmt.Fprintf(os.Stderr, "\n\n")
+	}
+	flag.Usage()
+	fmt.Fprintf(os.Stderr, "\n")
+	os.Exit(1)
 }
 
 func viewHandler(coregroups *[]coregroup) http.Handler{
@@ -37,10 +61,20 @@ func viewHandler(coregroups *[]coregroup) http.Handler{
 
 func main() {
 
-	data, err := ioutil.ReadFile("coregroups.json")
+	flag.Parse()
+
+	flag.Usage = func() {
+		fmt.Fprint(os.Stderr, usage)
+	}
+
+	if flag.NFlag() < 3 {
+		usageAndExit("You did not supply enough arguments")
+	}
+
+	data, err := ioutil.ReadFile(*coregroupFile)
 
 	if err != nil {
-		log.Fatal("unable to read file coregroups.json")
+		log.Fatal("unable to read file ", *coregroupFile)
 		panic(err)
 	}
 		
@@ -55,13 +89,11 @@ func main() {
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
 	mux.Handle("/coregroup/", vh)
-    err = http.ListenAndServe(port, mux)
+    err = http.ListenAndServeTLS(":8443", *cert, *key, mux)
 
 	if err != nil {
-		log.Fatal("Couldn't start application on ", port)	
+		log.Fatal("Couldn't start application on :8443")	
 		panic(err)
 	}
-
-
 }
 

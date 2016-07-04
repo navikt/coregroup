@@ -1,9 +1,9 @@
 FROM docker.adeo.no:5000/go-scratch
 MAINTAINER Sten Røkke<sten.ivar.rokke@nav.no>
 
-COPY coregroups /opt/coregroups/
-COPY coregroups.json /opt/coregroups/
+COPY dist /opt/coregroups
+
 #ADD server.key /etc/pki/tls/private/
 #ADD server.crt /etc/pki/tls/certs/
 EXPOSE 8080
-CMD ["/opt/coregroups/coregroups"]
+CMD ["/opt/coregroups/coregroups", "-file /opt/coregroups/coregroups.json", "-cert $TLS_CERT", "-key $TLS_PRIVATE_KEY"]
