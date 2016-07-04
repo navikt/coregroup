@@ -6,4 +6,4 @@ ADD ./dist .
 #ADD server.key /etc/pki/tls/private/
 #ADD server.crt /etc/pki/tls/certs/
 EXPOSE 8080
-CMD ["./coregroups"]
+CMD ["coregroups"]
