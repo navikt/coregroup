@@ -7,5 +7,6 @@ DISTDIR=$DOCKERDIR/dist
 rm -rf $DOCKERDIR
 mkdir -p $DISTDIR
 
-cp -r dist $DOCKERDIR
+cp coregroups $DISTDIR
+cp coregroups.json $DISTDIR
 cp Dockerfile $DOCKERDIR
