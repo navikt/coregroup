@@ -43,7 +43,10 @@ func usageAndExit(msg string) {
 func viewHandler(coregroups *[]coregroup) http.Handler{
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { 
 		var applicationName string
-		if r.URL.Query().Get("application") == "" {
+		if r.URL.Query().Get("listCoreGroups") {
+			w.Write([]byte("DefaultCoreGroup:HACore"))
+			return
+		} else if r.URL.Query().Get("application") == "" {
 			w.Write([]byte("Request parameter application missing "))
 			return
 		} else {
