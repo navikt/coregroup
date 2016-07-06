@@ -86,6 +86,14 @@ func main() {
 		panic(err)
 	}
 
+	if _, err := os.Stat(*cert); os.IsNotExist(err) {
+  		log.Fatal("Certificate %s does not exist", *cert)
+	}
+
+	if _, err := os.Stat(*key); os.IsNotExist(err) {
+	 	log.Fatal("Certificate %s does not exist", *key)
+	}
+
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
 	mux.Handle("/coregroup/", vh)
