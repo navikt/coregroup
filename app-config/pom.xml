@@ -3,7 +3,7 @@
     <groupId>no.nav.aura</groupId>
     <artifactId>coregroups-appconfig</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <parent>
         <groupId>no.nav.aura.maven.poms</groupId>
