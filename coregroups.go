@@ -87,11 +87,11 @@ func main() {
 	}
 
 	if _, err := os.Stat(*cert); os.IsNotExist(err) {
-  		log.Fatal("Certificate %s does not exist", *cert)
+  		log.Fatal("Certificate does not exist: ", *cert)
 	}
 
 	if _, err := os.Stat(*key); os.IsNotExist(err) {
-	 	log.Fatal("Certificate %s does not exist", *key)
+	 	log.Fatal("Certificate does not exist: ", *key)
 	}
 
 	mux := http.NewServeMux()
@@ -100,7 +100,7 @@ func main() {
     err = http.ListenAndServeTLS(":8443", *cert, *key, mux)
 
 	if err != nil {
-		log.Fatal("Couldn't start application on :8443")	
+		log.Fatal("Couldn't start application. ", err)	
 		panic(err)
 	}
 }
