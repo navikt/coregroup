@@ -1,7 +1,7 @@
 [
   {
-    "application": "wasdeploy-test1",
-    "coregroupName": "HACoreGroup1"
+    "application": "wasdeploy-test",
+    "coregroupName": "NoHACoreGroup1"
   },
   {
     "application": "dmgr",
