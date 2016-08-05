@@ -12,8 +12,10 @@ import (
 
 var (
 	coregroupFile = flag.String("file", "", "")
-	cert = flag.String("cert", "", "")
-	key = flag.String("key", "", "")
+	cert = os.Getenv("TLS_CERT")
+	//flag.String("cert", "", "")
+	key = os.Getenv("TLS_PRIVATE_KEY")
+	//key = flag.String("key", "", "")
 )
 
 var usage = `Usage: coregroups [options...]
@@ -21,8 +23,6 @@ var usage = `Usage: coregroups [options...]
 Options:
 
   -file  		JSON-file containing your endpoints
-  -cert			Server certificate
-  -key			Server private key
 `
 
 type coregroup struct {
@@ -67,7 +67,7 @@ func main() {
 		fmt.Fprint(os.Stderr, usage)
 	}
 
-	if flag.NFlag() < 3 {
+	if flag.NFlag() < 1 {
 		usageAndExit("You did not supply enough arguments")
 	}
 
@@ -86,18 +86,18 @@ func main() {
 		panic(err)
 	}
 
-	if _, err := os.Stat(*cert); os.IsNotExist(err) {
-  		log.Fatal("Certificate does not exist: ", *cert)
+	if _, err := os.Stat(cert); os.IsNotExist(err) {
+  		log.Fatal("Certificate does not exist: ", cert)
 	}
 
-	if _, err := os.Stat(*key); os.IsNotExist(err) {
-	 	log.Fatal("Certificate does not exist: ", *key)
+	if _, err := os.Stat(key); os.IsNotExist(err) {
+	 	log.Fatal("Certificate does not exist: ", key)
 	}
 
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
 	mux.Handle("/coregroups/", vh)
-    err = http.ListenAndServeTLS(":8443", *cert, *key, mux)
+    err = http.ListenAndServeTLS(":8443", cert, key, mux)
 
 	if err != nil {
 		log.Fatal("Couldn't start application. ", err)	
