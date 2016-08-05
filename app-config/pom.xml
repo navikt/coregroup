@@ -4,7 +4,6 @@
     <artifactId>coregroups-appconfig</artifactId>
     <packaging>jar</packaging>
     <version>1.0.9-SNAPSHOT</version>
-
     <parent>
         <groupId>no.nav.aura.maven.poms</groupId>
         <artifactId>nav-root-pom</artifactId>

@@ -1,5 +1,9 @@
 [
   {
+    "application": "wasdeploy-test",
+    "coregroupName": "HACoreGroup1"
+  },
+  {
     "application": "dmgr",
     "coregroupName": "DefaultCoreGroup"
   },
