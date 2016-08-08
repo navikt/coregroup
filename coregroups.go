@@ -46,9 +46,8 @@ func viewHandler(coregroups *[]coregroup) http.Handler{
 		if r.URL.Query().Get("application") == "" {
 			for _,cg := range *coregroups {
 				var line string
-				line = cg.CoregroupName + ":" + cg.Application + "\n"
+				line = cg.Application + ":" + cg.CoregroupName + "\n"
 				w.Write([]byte(line))
-				return
 			}
 		} else {
 			applicationName = r.URL.Query().Get("application")
