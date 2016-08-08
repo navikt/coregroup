@@ -44,8 +44,12 @@ func viewHandler(coregroups *[]coregroup) http.Handler{
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { 
 		var applicationName string
 		if r.URL.Query().Get("application") == "" {
-			w.Write([]byte("Request parameter application missing "))
-			return
+			for _,cg := range *coregroups {
+				var line string
+				line = cg.CoregroupName + ":" + cg.Application + "\n"
+				w.Write([]byte(line))
+				return
+			}
 		} else {
 			applicationName = r.URL.Query().Get("application")
 			for _,correctCoregroup := range *coregroups {
