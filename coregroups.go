@@ -99,7 +99,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
-	mux.Handle("/coregroups/", vh)
+	mux.Handle("/", vh)
     err = http.ListenAndServeTLS(":8443", cert, key, mux)
 
 	if err != nil {
