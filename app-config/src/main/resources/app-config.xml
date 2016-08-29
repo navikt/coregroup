@@ -6,6 +6,6 @@
     <artifacts />
 
     <exposed-services>
-        <exposedUrl name="coregroupService"  description="Service to find coregroup-mapping for WAS applications" path="/coregroups/"/>
+        <exposedUrl name="coregroupService"  description="Service to find coregroup-mapping for WAS applications" path="/"/>
     </exposed-services>
 </application>
