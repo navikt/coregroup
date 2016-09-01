@@ -182,6 +182,62 @@
   { 
     "application": "utbetaldata",
     "coregroupName": "NoHACoreGroup1"
+  },
+    { 
+    "application": "applikasjonsgruppe:helfo",
+    "coregroupName": "NoHACoreGroup1"
+  },
+  { 
+    "application": "applikasjonsgruppe:pesys",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
+    "application": "applikasjonsgruppe:diverse",
+    "coregroupName": "NoHACoreGroup1"
+  },
+  { 
+    "application": "applikasjonsgruppe:tpsws",
+    "coregroupName": "NoHACoreGroup1"
+  },
+  { 
+    "application": "applikasjonsgruppe:personkortene",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
+    "application": "applikasjonsgruppe:vedtak",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "applikasjonsgruppe:administrative losninger",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "applikasjonsgruppe:eia",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "applikasjonsgruppe:informasjonsplattform",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "applikasjonsgruppe:bisys",
+    "coregroupName": "HACoreGroup2"
+  },
+  { 
+    "application": "applikasjonsgruppe:gosys og ruting",
+    "coregroupName": "HACoreGroup1"
+  },
+  { 
+    "application": "applikasjonsgruppe:gsak og gsynk",
+    "coregroupName": "HACoreGroup1"
+  },
+  { 
+    "application": "applikasjonsgruppe:hyllevare",
+    "coregroupName": "DefaultCoreGroup"
+  },
+  { 
+    "application": "applikasjonsgruppe:elektronisk samhandling",
+    "coregroupName": "DefaultCoreGroup"
   }
 ]
 
