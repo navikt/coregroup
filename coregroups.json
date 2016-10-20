@@ -1,5 +1,9 @@
 [
   {
+    "application": "was-testapp",
+    "coregroupName": "NoHACoreGroup1"
+  },
+  {
     "application": "wasdeploy-test",
     "coregroupName": "NoHACoreGroup1"
   },
