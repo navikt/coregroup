@@ -242,6 +242,10 @@
   { 
     "application": "applikasjonsgruppe:elektronisk samhandling",
     "coregroupName": "DefaultCoreGroup"
+  },
+  {
+    "application": "ur-iso",
+    "coregroupName": "HACoreGroup2"
   }
 ]
 
