@@ -12,10 +12,6 @@ import (
 
 var (
 	coregroupFile = flag.String("file", "", "")
-	cert = os.Getenv("TLS_CERT")
-	//flag.String("cert", "", "")
-	key = os.Getenv("TLS_PRIVATE_KEY")
-	//key = flag.String("key", "", "")
 )
 
 var usage = `Usage: coregroups [options...]
@@ -89,18 +85,16 @@ func main() {
 		panic(err)
 	}
 
-	if _, err := os.Stat(cert); os.IsNotExist(err) {
-  		log.Fatal("Certificate does not exist: ", cert)
-	}
-
-	if _, err := os.Stat(key); os.IsNotExist(err) {
-	 	log.Fatal("Certificate does not exist: ", key)
-	}
-
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
+	mux.HandleFunc("/isAlive", func(w http.ResponseWriter, _ *http.Request){
+		fmt.Fprint(w, "")
+	})
+	mux.HandleFunc("/isReady", func(w http.ResponseWriter, _ *http.Request){
+		fmt.Fprint(w, "")
+	})
 	mux.Handle("/", vh)
-    err = http.ListenAndServeTLS(":8443", cert, key, mux)
+    err = http.ListenAndServe(":80", mux)
 
 	if err != nil {
 		log.Fatal("Couldn't start application. ", err)	

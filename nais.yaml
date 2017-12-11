@@ -1,0 +1,10 @@
+name: coregroups
+replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 50
+port: 80
+fasitResources:
+  exposed:
+  - alias: coregroupService
+    resourceType: restService
