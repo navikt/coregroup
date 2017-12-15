@@ -8,3 +8,6 @@ fasitResources:
   exposed:
   - alias: coregroupService
     resourceType: restService
+  used:
+  - alias: loadbalancer:coregroups
+    resourceType: LoadBalancerConfig
