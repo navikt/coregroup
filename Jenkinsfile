@@ -14,7 +14,8 @@ node {
 
         stage("initialize") {
 			changelog = sh(script: 'git log `git describe --tags --abbrev=0`..HEAD --oneline', returnStdout: true)
-            releaseVersion = sh(script: "\$(expr \$(awk -F. \'{print \$1}\' ./version) + 1).0.0)", returnStdout: true).trim()
+            currentVersion = sh(script: "cat ./version", returnStdout: true).trim() // ex. 1.0.0
+            releaseVersion = currentVersion[0].toInteger() +1 +".0.0"
             sh "echo ${releaseVersion} > ./version"
             sh "git add version"
             sh "git commit -am 'increased cersion number to ${releaseVersion}"
