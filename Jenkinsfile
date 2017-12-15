@@ -18,7 +18,7 @@ node {
             releaseVersion = currentVersion[0].toInteger() +1 +".0.0"
             sh "echo ${releaseVersion} > ./version"
             sh "git add version"
-            sh "git commit -am 'increased cersion number to ${releaseVersion}"
+            sh "git commit -am 'increased cersion number to ${releaseVersion}'"
             sh "git push origin master"
 
              // aborts pipeline if releaseVersion already is released
