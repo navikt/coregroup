@@ -2,6 +2,7 @@ import groovy.json.JsonSlurper;
 node {
     def committer, committerEmail, changelog // metadata
     def groupId = "nais"
+    def appConfig = "nais.yaml"
     def application = "coregroups"
     def dockerDir = "./docker"
     def distDir = "${dockerDir}/dist"
