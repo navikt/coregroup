@@ -39,14 +39,11 @@ node {
 
         stage("compile binary and prepare build") {
             sh "CGO_ENABLED=0 GOOS=linux ${go} build -a -installsuffix cgo -o coregroups ."
-            sh "rm -rf ${dockerDir} && mkdir -p ${distDir}"
-            sh "cp coregroups coregroups.json ${distDir}"
-            sh "cp Dockerfile ${dockerDir}"
         }
 
         stage("build and publish docker image") {
             def imageName = "docker.adeo.no:5000/${application}:${releaseVersion}"
-            sh "sudo docker build -t ${imageName} ./docker"
+            sh "sudo docker build -t ${imageName} ."
             sh "sudo docker push ${imageName}"
         }
 
