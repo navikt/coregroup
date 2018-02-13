@@ -77,7 +77,7 @@ func main() {
 		panic(err)
 	}
 
-	coregroups := []coregroup{nil}
+	coregroups := []coregroup{}
 	err = json.Unmarshal(data, &coregroups)
 
 	if err != nil {
