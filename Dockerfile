@@ -1,5 +1,4 @@
-FROM docker.adeo.no:5000/go-scratch
-MAINTAINER Sten R�kke<sten.ivar.rokke@nav.no>
+FROM golang:1.9.4-alpine
 
 COPY dist /opt/coregroups
 EXPOSE 80
