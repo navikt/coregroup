@@ -22,7 +22,7 @@ Options:
 `
 
 type coregroup struct {
-	Application string `json:"application"`
+	Application   string `json:"application"`
 	CoregroupName string `json:"coregroupName"`
 }
 
@@ -36,18 +36,18 @@ func usageAndExit(msg string) {
 	os.Exit(1)
 }
 
-func viewHandler(coregroups *[]coregroup) http.Handler{
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { 
+func viewHandler(coregroups *[]coregroup) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var applicationName string
 		if r.URL.Query().Get("application") == "" {
-			for _,cg := range *coregroups {
+			for _, cg := range *coregroups {
 				var line string
 				line = cg.Application + ":" + cg.CoregroupName + "\n"
 				w.Write([]byte(line))
 			}
 		} else {
 			applicationName = r.URL.Query().Get("application")
-			for _,correctCoregroup := range *coregroups {
+			for _, correctCoregroup := range *coregroups {
 				if applicationName == correctCoregroup.Application {
 					w.Write([]byte(correctCoregroup.CoregroupName))
 					return
@@ -76,29 +76,28 @@ func main() {
 		log.Fatal("unable to read file ", *coregroupFile)
 		panic(err)
 	}
-		
-	coregroups := []coregroup{}
+
+	coregroups := []coregroup{nil}
 	err = json.Unmarshal(data, &coregroups)
 
 	if err != nil {
-		log.Fatal("Couldn't parse JSON: ", string(data))	
+		log.Fatal("Couldn't parse JSON: ", string(data))
 		panic(err)
 	}
 
 	mux := http.NewServeMux()
 	vh := viewHandler(&coregroups)
-	mux.HandleFunc("/isAlive", func(w http.ResponseWriter, _ *http.Request){
+	mux.HandleFunc("/isAlive", func(w http.ResponseWriter, _ *http.Request) {
 		fmt.Fprint(w, "")
 	})
-	mux.HandleFunc("/isReady", func(w http.ResponseWriter, _ *http.Request){
+	mux.HandleFunc("/isReady", func(w http.ResponseWriter, _ *http.Request) {
 		fmt.Fprint(w, "")
 	})
 	mux.Handle("/", vh)
-    err = http.ListenAndServe(":80", mux)
+	err = http.ListenAndServe(":80", mux)
 
 	if err != nil {
-		log.Fatal("Couldn't start application. ", err)	
+		log.Fatal("Couldn't start application. ", err)
 		panic(err)
 	}
 }
-
