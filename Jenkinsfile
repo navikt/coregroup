@@ -1,6 +1,7 @@
 import groovy.json.JsonSlurper;
+
 node {
-    def committer, committerEmail, changelog // metadata
+    def committer
     def groupId = "nais"
     def appConfig = "nais.yaml"
     def application = "coregroups"
@@ -8,24 +9,32 @@ node {
     def distDir = "${dockerDir}/dist"
     def go = "/usr/local/go/bin/go"
 
-    try {
-        stage("checkout") {
-            git url: "ssh://git@stash.devillo.no:7999/aura/${application}.git"
-        }
+    stage("checkout") {
+	git url: "https://github.com/navikt/${application}.git"
+    }
 
-        stage("initialize") {
-	    changelog = sh(script: 'git log `git describe --tags --abbrev=0`..HEAD --oneline', returnStdout: true)
-            currentVersion = sh(script: "cat ./version", returnStdout: true).trim() // ex. 1.0.0
+    lastCommitMessage = sh(script: "git --no-pager log -1 --pretty=%B", returnStdout: true).trim()
+    if (lastCommitMessage != null &&
+        lastCommitMessage.toString().contains('Releasing ')) {
+	return
+    }
+
+    try {
+	stage("initialize") {
+	    currentVersion = sh(script: "cat ./version", returnStdout: true).trim() // ex. 1.0.0
             releaseVersion = currentVersion[0].toInteger() +1 +".0.0"
             sh "echo ${releaseVersion} > ./version"
             sh "git add version"
-            sh "git commit -am 'increased cersion number to ${releaseVersion}'"
-            sh "git push origin master"
+            sh "git commit -am 'Releasing ${releaseVersion}'"
+	    sh "git tag ${releaseVersion}"
+	    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'navikt-ci', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+		withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=adeo.no']) {
+		    sh(script: "git push https://${USERNAME}:${PASSWORD}@github.com/navikt/${application}.git --tags")
+		    sh(script: "git push https://${USERNAME}:${PASSWORD}@github.com/navikt/${application}.git master")
+		}
+	    }
 
-            // aborts pipeline if releaseVersion already is released
-            sh "if [ \$(curl -s -o /dev/null -I -w \"%{http_code}\" http://maven.adeo.no/m2internal/no/nav/aura/${application}/${application}/${releaseVersion}) != 404 ]; then echo \"this version is somehow already released, manually update to a unreleased SNAPSHOT version\"; exit 1; fi"
             committer = sh(script: 'git log -1 --pretty=format:"%ae (%an)"', returnStdout: true).trim()
-            committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
         }
 
         stage("compile binary and prepare build") {
@@ -34,7 +43,6 @@ node {
             sh "cp coregroups coregroups.json ${distDir}"
             sh "cp Dockerfile ${dockerDir}"
         }
-
 
         stage("build and publish docker image") {
             def imageName = "docker.adeo.no:5000/${application}:${releaseVersion}"
@@ -69,15 +77,17 @@ node {
                 sh "curl -k -d \'{\"application\": \"${application}\", \"version\": \"${releaseVersion}\", \"environment\": \"p\", \"zone\": \"fss\", \"namespace\": \"default\", \"username\": \"${env.USERNAME}\", \"password\": \"${env.PASSWORD}\"}\' https://daemon.nais.adeo.no/deploy"
             }
         }
+
         slackSend channel: '#nais-internal', message: ":nais: Successfully deployed ${application}:${releaseVersion} to prod :partyparrot: \nhttps://${application}.nais.adeo.no\nLast commit by ${committer}.", teamDomain: 'nav-it', tokenCredentialId: 'slack_fasit_frontend'
+
         if (currentBuild.result == null) {
             currentBuild.result = "SUCCESS"
         }
-
     } catch(e) {
         if (currentBuild.result == null) {
             currentBuild.result = "FAILURE"
         }
+
         slackSend channel: '#nais-internal', message: ":shit: Failed deploying ${application}:${releaseVersion}: ${e.getMessage()}. See log for more info ${env.BUILD_URL}", teamDomain: 'nav-it', tokenCredentialId: 'slack_fasit_frontend'
         throw e
     } finally {
