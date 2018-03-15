@@ -10,7 +10,8 @@ node {
     def go = "/usr/local/go/bin/go"
 
     stage("checkout") {
-	git url: "https://github.com/navikt/${application}.git"
+	git credentialsId: 'navikt-ci',
+            url: "https://github.com/navikt/${application}.git"
     }
 
     lastCommitMessage = sh(script: "git --no-pager log -1 --pretty=%B", returnStdout: true).trim()
