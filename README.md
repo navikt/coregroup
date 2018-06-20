@@ -1,6 +1,6 @@
 Coregroup service
 =================
 
-Go-tjeneste som sjekker hvilken coregroup en WAS-applikasjon skal tiløre.
+Go service used to check which coregroup in Websphere a certain application is supposed to belong to. Used during setup of WAS and deploy of applications.
 
-Sjekker i utgangspunktet opp i en JSON-fil hvilken coregroup applikasjonen er definert med, hvis ingen, settes den til DefaultCoreGroup. Returnerer en string med navnet til konsumenten.
+corgroups.json contains the mapping of applications to coregroups. If the application is not defined in the JSON-file, the DefaultCoreGroup will be used. Returns a string with the coregroup name.

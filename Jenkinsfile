@@ -22,8 +22,8 @@ node {
 
     try {
 	stage("initialize") {
-	    currentVersion = sh(script: "cat ./version", returnStdout: true).trim() // ex. 1.0.0
-            releaseVersion = currentVersion[0].toInteger() +1 +".0.0"
+	    currentVersion = sh(script: "cat ./version", returnStdout: true).trim()
+            releaseVersion = currentVersion.toInteger() + 1
             sh "echo ${releaseVersion} > ./version"
             sh "git add version"
             sh "git commit -am 'Releasing ${releaseVersion}'"
