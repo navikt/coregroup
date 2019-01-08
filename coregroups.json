@@ -140,6 +140,10 @@
     "coregroupName": "HACoreGroup3"
   },
   { 
+    "application": "preg",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
     "application": "sam",
     "coregroupName": "HACoreGroup3"
   },
