@@ -28,7 +28,7 @@ node {
             sh "git add version"
             sh "git commit -am 'Releasing ${releaseVersion}'"
 	    sh "git tag ${releaseVersion}"
-	    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'navikt-ci', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+	    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'coregroups', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
 		withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=adeo.no']) {
 		    sh(script: "git push https://${USERNAME}:${PASSWORD}@github.com/navikt/${application}.git --tags")
 		    sh(script: "git push https://${USERNAME}:${PASSWORD}@github.com/navikt/${application}.git master")
