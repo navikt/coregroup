@@ -23,15 +23,15 @@ node {
     try {
 	stage("initialize") {
 	    currentVersion = sh(script: "cat ./version", returnStdout: true).trim()
-            releaseVersion = currentVersion.toInteger() + 1
-            sh "echo ${releaseVersion} > ./version"
-            sh "git add version"
-            sh "git commit -am 'Releasing ${releaseVersion}'"
+      releaseVersion = currentVersion.toInteger() + 1
+      sh "echo ${releaseVersion} > ./version"
+      sh "git add version"
+      sh "git commit -am 'Releasing ${releaseVersion}'"
 	    sh "git tag ${releaseVersion}"
-	    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'coregroups', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-		withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=adeo.no']) {
-		    sh(script: "git push https://${USERNAME}:${PASSWORD}@github.com/navikt/${application}.git --tags")
-		    sh(script: "git push https://${USERNAME}:${PASSWORD}@github.com/navikt/${application}.git master")
+	    sshagent(credentials: ['coregroups']) {
+		    withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=adeo.no']) {
+		      sh(script: "git push https://git@github.com/navikt/${application}.git --tags")
+		      sh(script: "git push https://git@github.com/navikt/${application}.git master")
 		}
 	    }
 
