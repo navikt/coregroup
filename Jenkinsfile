@@ -28,15 +28,12 @@ node {
       sh "git add version"
       sh "git commit -am 'Releasing ${releaseVersion}'"
 	    sh "git tag ${releaseVersion}"
-	    sshagent(credentials: ['coregroups']) {
 		    withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=adeo.no']) {
-		      sh(script: "git push https://git@github.com/navikt/${application}.git --tags")
-		      sh(script: "git push https://git@github.com/navikt/${application}.git master")
-		}
-	    }
-
-            committer = sh(script: 'git log -1 --pretty=format:"%ae (%an)"', returnStdout: true).trim()
-        }
+		      sh(script: "git push https://github.com/navikt/${application}.git --tags")
+		      sh(script: "git push https://github.com/navikt/${application}.git master")
+	      }
+      committer = sh(script: 'git log -1 --pretty=format:"%ae (%an)"', returnStdout: true).trim()
+    }
 
         stage("compile binary and prepare build") {
             sh "CGO_ENABLED=0 GOOS=linux ${go} build -a -installsuffix cgo -o coregroups ."
