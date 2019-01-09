@@ -11,7 +11,7 @@ node {
 
     stage("checkout") {
 	git credentialsId: 'coregroups',
-            url: "https://github.com/navikt/${application}.git"
+            url: "https://coregroups@github.com/navikt/${application}.git"
     }
 
     lastCommitMessage = sh(script: "git --no-pager log -1 --pretty=%B", returnStdout: true).trim()
@@ -29,8 +29,8 @@ node {
       sh "git commit -am 'Releasing ${releaseVersion}'"
 	    sh "git tag ${releaseVersion}"
 		    withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=adeo.no']) {
-		      sh(script: "git push https://github.com/navikt/${application}.git --tags")
-		      sh(script: "git push https://github.com/navikt/${application}.git master")
+		      sh(script: "git push https://coregroups@github.com/navikt/${application}.git --tags")
+		      sh(script: "git push https://coregroups@github.com/navikt/${application}.git master")
 	      }
       committer = sh(script: 'git log -1 --pretty=format:"%ae (%an)"', returnStdout: true).trim()
     }
