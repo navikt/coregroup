@@ -10,7 +10,7 @@ node {
     def go = "/usr/local/go/bin/go"
 
     stage("checkout") {
-	git credentialsId: 'navikt-ci',
+	git credentialsId: 'coregroups',
             url: "https://github.com/navikt/${application}.git"
     }
 
