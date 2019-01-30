@@ -144,6 +144,10 @@
     "coregroupName": "HACoreGroup3"
   },
   { 
+    "application": "preg-fss",
+    "coregroupName": "HACoreGroup3"
+  },
+  { 
     "application": "sam",
     "coregroupName": "HACoreGroup3"
   },
